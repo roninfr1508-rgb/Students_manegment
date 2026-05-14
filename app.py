@@ -8,14 +8,14 @@ app = Flask(__name__)
 bot = telebot.TeleBot(config.BOT_TOKEN)
 def set_bot_commands():
     commands = [
-        telebot.types.BotCommand("start", "Запустить бота"),
-        telebot.types.BotCommand("help", "Показать справку"),
-        telebot.types.BotCommand("save", "Сохранить студента"),
-        telebot.types.BotCommand("list", "Список студентов"),
-        telebot.types.BotCommand("fact", "Случайный факт"),
-        telebot.types.BotCommand("validate", "Проверить формат группы"),
-        telebot.types.BotCommand("del_student", "Удалить по ID"),
-        telebot.types.BotCommand("del_random", "Удалить случайного")
+        telebot.types.BotCommand("start", "turn on bot"),
+        telebot.types.BotCommand("help", "list of all commands"),
+        telebot.types.BotCommand("save", "save studnt"),
+        telebot.types.BotCommand("list", "list of students"),
+        telebot.types.BotCommand("fact", "useless fact"),
+        telebot.types.BotCommand("validate", "check if group valid"),
+        telebot.types.BotCommand("del_student", "delete student by id"),
+        telebot.types.BotCommand("del_random", "if you feeling bored")
     ]
     bot.set_my_commands(commands)
 
