@@ -8,9 +8,10 @@ def log_command(func):
 
 def fact_generator():
     facts = [
-        "Python was named after Monty Python's Flying Circus.",
-        "The first version of Flask was created as an April Fool's joke.",
-        "Telegram has over 800 million active users."
+        "I love skibidi toilet",
+        "67 is super prime number",
+        "Generation z is cooked"
+        "All people deserve 100 points"
     ]
     for fact in facts:
         yield fact
