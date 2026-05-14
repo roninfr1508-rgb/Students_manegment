@@ -1,0 +1,21 @@
+# Telegram Bot Webhook API
+
+This bot demonstrates Object-Oriented Programming, decorators, generators, and regular expressions in Python via a Flask Webhook server.
+
+## Features
+* OOP implementation (Inheritance, Encapsulation)
+* Webhook server handling via Flask
+* Decorators for action logging
+* Generators for cyclic fact responses
+* Regex for data validation
+
+## Setup Guide
+1. Create a bot using BotFather and get the token.
+2. Install dependencies: `pip install -r requirements.txt`
+3. Update `config.py` with your `BOT_TOKEN`.
+4. Run ngrok: `ngrok http 5000` and copy the HTTPS URL.
+5. Update `config.py` with your `WEBHOOK_URL`.
+6. Run the setup webhook script using requests (Step 4 from assignment).
+7. Start the application: `python app.py`
+
+Mode: Webhook
