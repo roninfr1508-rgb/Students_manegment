@@ -2,10 +2,24 @@ import telebot
 from flask import Flask, request
 import config
 from bot.models import Student
-from bot.utils import log_command, fact_generator, validate_group
+from bot.utils import log_command, fact_generator, validate_group, remove_random_student
 
 app = Flask(__name__)
 bot = telebot.TeleBot(config.BOT_TOKEN)
+def set_bot_commands():
+    commands = [
+        telebot.types.BotCommand("start", "Запустить бота"),
+        telebot.types.BotCommand("help", "Показать справку"),
+        telebot.types.BotCommand("save", "Сохранить студента"),
+        telebot.types.BotCommand("list", "Список студентов"),
+        telebot.types.BotCommand("fact", "Случайный факт"),
+        telebot.types.BotCommand("validate", "Проверить формат группы"),
+        telebot.types.BotCommand("del_student", "Удалить по ID"),
+        telebot.types.BotCommand("del_random", "Удалить случайного")
+    ]
+    bot.set_my_commands(commands)
+
+set_bot_commands()
 
 saved_students = {}
 facts = fact_generator()
@@ -27,7 +41,7 @@ def send_welcome(message):
 @bot.message_handler(commands=['help'])
 @log_command
 def send_help(message):
-    help_text = "/start\n/help\n/echo\n/save\n/list\n/fact\n/validate\n/about\n/update\n/del_student"
+    help_text = "/start # bot start working\n/help #command list\n/echo #copies your message\n/saves #saves student\n/list #gives list of students \n/fact #tells you random useless fact\n/validate #checks is group valid \n/about #info about bot\n/update #updates student by their id\n/del_student # removes student by their id student\n/remove_random_student #if you feeling bored use this"
     bot.reply_to(message, help_text)
 
 @bot.message_handler(commands=['echo'])
@@ -160,6 +174,17 @@ def update_student(message):
             bot.reply_to(message, "Error! Invalid ID, age or GPA format.")
     else:
         bot.reply_to(message, "Format: /update ID name age group GPA")
+
+
+@bot.message_handler(commands=['del_random'])
+def delete_random(message):
+    user_id = message.from_user.id
+    deleted_student = remove_random_student(saved_students, user_id)
+
+    if deleted_student:
+        bot.reply_to(message, f"Deleted: {deleted_student.name}")
+    else:
+        bot.reply_to(message, "No saved students")
 
 
 if __name__ == '__main__':

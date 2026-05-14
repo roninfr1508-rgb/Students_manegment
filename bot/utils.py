@@ -1,4 +1,5 @@
 import re
+import random
 
 def log_command(func):
     def wrapper(message, *args, **kwargs):
@@ -19,3 +20,12 @@ def fact_generator():
 def validate_group(group_str):
     pattern = r"^[A-Z]{2}-\d{4}$"
     return bool(re.match(pattern, group_str))
+
+import random
+
+def remove_random_student(students_dict, user_id):
+    if user_id in students_dict and students_dict[user_id]:
+        student = random.choice(students_dict[user_id])
+        students_dict[user_id].remove(student)
+        return student
+    return None
